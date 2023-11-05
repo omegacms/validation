@@ -1,0 +1,102 @@
+<?php
+/**
+ * Part of Omega CMS - Validation Package
+ *
+ * @link        https://omegacms.github.io
+ * @author      Adriano Giovannini <omegacms@outlook.com>
+ * @copyright   Copyright (c) 2022 Adriano Giovannini. (https://omegacms.github.io)
+ * @license     https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
+ */
+
+/**
+ * @declare
+ */
+declare( strict_types = 1 );
+
+/**
+ * @namespace
+ */
+namespace Omega\Validation\Exceptions;
+
+/**
+ * @use
+ */
+use InvalidArgumentException;
+
+/**
+ * Validation exception class.
+ *
+ * The `ValidationException` is thrown when validation fails, and it provides a way 
+ * to store and retrieve validation errors.
+ *
+ * @category    Omega
+ * @package     Omega\Validation
+ * @subpackage  Omega\Validation\Exceptions
+ * @link        https://omegacms.github.io
+ * @author      Adriano Giovannini <omegacms@outlook.com>
+ * @copyright   Copyright (c) 2022 Adriano Giovannini. (https://omegacms.github.io)
+ * @license     https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
+ * @version     1.0.0
+ */
+class ValidationException extends InvalidArgumentException
+{
+    /**
+     * Errors array.
+     *
+     * @var array $errors Holds an array of validation errors.
+     */
+    protected array $errors = [];
+
+    /**
+     * Session name.
+     *
+     * @var string $sessionName Holds the name of the session where validation errors should be stored.
+     */
+    protected string $sessionName = 'errors';
+
+    /**
+     * Set the validation errors.
+     *
+     * @param  array $errors Holds an array containing validation errors.
+     * @return $this
+     */
+    public function setErrors( array $errors ) : static
+    {
+        $this->errors = $errors;
+
+        return $this;
+    }
+
+    /**
+     * Get the validation errors.
+     *
+     * @return array An array of validation errors.
+     */
+    public function getErrors() : array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Set the session name for storing validation errors.
+     *
+     * @param  string $sessionName Holds the name of the session where validation errors should be stored.
+     * @return $this
+     */
+    public function setSessionName( string $sessionName ) : static
+    {
+        $this->sessionName = $sessionName;
+
+        return $this;
+    }
+
+    /**
+     * Get the session name for storing validation errors.
+     *
+     * @return string Return the name of the session where validation errors are stored.
+     */
+    public function getSessionName() : string
+    {
+        return $this->sessionName;
+    }
+}
