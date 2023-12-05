@@ -27,9 +27,9 @@ use InvalidArgumentException;
 /**
  * Min rule class.
  *
- * The `MinRule` class is responsible for validating whether a given input string 
- * has a minimum length. It checks if the input is empty and, if not, compares its 
- * length with the specified minimum length parameter. If the input is empty, it is 
+ * The `MinRule` class is responsible for validating whether a given input string
+ * has a minimum length. It checks if the input is empty and, if not, compares its
+ * length with the specified minimum length parameter. If the input is empty, it is
  * considered valid.
  *
  * @category    Omega

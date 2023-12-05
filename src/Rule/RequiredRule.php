@@ -21,8 +21,8 @@ namespace Omega\Validation\Rule;
 /**
  * Required rule class.
  *
- * The `RequiredRule` class is responsible for validating whether a given input field 
- * is required and not empty. It checks if the input is empty and returns `true` if it's 
+ * The `RequiredRule` class is responsible for validating whether a given input field
+ * is required and not empty. It checks if the input is empty and returns `true` if it's
  * not, indicating that the input is valid.
  *
  * @category    Omega

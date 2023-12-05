@@ -31,8 +31,8 @@ use Omega\Validation\Rule\RequiredRule;
 /**
  * Validation service provider class.
  *
- * The `ValidationServiceProvider` class binds validation-related components to the 
- * application container. It registers validation rules and a ValidationManager instance 
+ * The `ValidationServiceProvider` class binds validation-related components to the
+ * application container. It registers validation rules and a ValidationManager instance
  * for handling validation.
  *
  * @category    Omega

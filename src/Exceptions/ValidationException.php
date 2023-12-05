@@ -26,7 +26,7 @@ use InvalidArgumentException;
 /**
  * Validation exception class.
  *
- * The `ValidationException` is thrown when validation fails, and it provides a way 
+ * The `ValidationException` is thrown when validation fails, and it provides a way
  * to store and retrieve validation errors.
  *
  * @category    Omega

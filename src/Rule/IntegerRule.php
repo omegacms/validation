@@ -27,8 +27,8 @@ use function is_numeric;
 /**
  * Integer rule class.
  *
- * The `IntegerRule` class is responsible for validating whether a given input is a valid 
- * integer. It checks if the input is empty and, if not, verifies if it is numeric and if 
+ * The `IntegerRule` class is responsible for validating whether a given input is a valid
+ * integer. It checks if the input is empty and, if not, verifies if it is numeric and if
  * it can be converted to an integer. If the input is empty, it is considered valid.
  *
  * @category    Omega

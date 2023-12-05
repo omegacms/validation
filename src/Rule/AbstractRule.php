@@ -21,8 +21,8 @@ namespace Omega\Validation\Rule;
 /**
  * Abstract rule class.
  *
- * The `AbstractRule` class provides a foundation for implementing custom validation 
- * rules in Omega. It implements the RuleInterface, which defines the contract for 
+ * The `AbstractRule` class provides a foundation for implementing custom validation
+ * rules in Omega. It implements the RuleInterface, which defines the contract for
  * all validation rules.
  *
  * @category    Omega

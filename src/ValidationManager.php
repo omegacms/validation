@@ -30,8 +30,8 @@ use Omega\Validation\Exceptions\ValidationException;
 /**
  * Validation manager class.
  *
- * The `ValidationManager` class provides a flexible and extensible way to perform data 
- * validation. This class allows you to define validation rules and validate data against 
+ * The `ValidationManager` class provides a flexible and extensible way to perform data
+ * validation. This class allows you to define validation rules and validate data against
  * those rules.
  *
  * @category    Omega
