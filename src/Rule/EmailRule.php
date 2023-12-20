@@ -59,7 +59,7 @@ class EmailRule extends AbstractRule
     }
 
     /**
-     * @inheritdoc.
+     * @inheritdoc
      *
      * @param  array  $data   Holds an array of data.
      * @param  string $field  Holds the name of the field that failed validation.
