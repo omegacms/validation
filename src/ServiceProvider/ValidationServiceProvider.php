@@ -54,7 +54,7 @@ class ValidationServiceProvider
      */
     public function bind( Application $application ) : void
     {
-        $application->bind( 'validator', function ( $application ) {
+        $application->alias( 'validator', function ( $application ) {
             $validationManager = new ValidationManager();
 
             $this->bindRules( $application, $validationManager );
@@ -74,10 +74,10 @@ class ValidationServiceProvider
      */
     private function bindRules( Application $application, ValidationManager $validationManager ) : void
     {
-        $application->bind( 'validation.rule.required', fn() => new RequiredRule() );
-        $application->bind( 'validation.rule.email', fn() => new EmailRule() );
-        $application->bind( 'validation.rule.min', fn() => new MinRule() );
-        $application->bind( 'validation.rule.integer', fn() => new IntegerRule() );
+        $application->alias( 'validation.rule.required', fn() => new RequiredRule() );
+        $application->alias( 'validation.rule.email', fn() => new EmailRule() );
+        $application->alias( 'validation.rule.min', fn() => new MinRule() );
+        $application->alias( 'validation.rule.integer', fn() => new IntegerRule() );
 
         $validationManager->addRule( 'required', $application->resolve( 'validation.rule.required' ) );
         $validationManager->addRule( 'email', $application->resolve( 'validation.rule.email' ) );
