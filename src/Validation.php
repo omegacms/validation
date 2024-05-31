@@ -42,7 +42,7 @@ use Omega\Validation\Exceptions\ValidationException;
  * @license     https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
  * @version     1.0.0
  */
-class ValidationManager implements ValidationInterface
+class Validation extends AbstractValidation
 {
     /**
      * Rule array.
@@ -80,12 +80,12 @@ class ValidationManager implements ValidationInterface
 
         foreach ( $rules as $field => $rulesForField ) {
             foreach ( $rulesForField as $rule ) {
-                $name = $rule;
+                $name   = $rule;
                 $params = [];
 
                 if ( str_contains( $rule, ':' ) ) {
                     [ $name, $params ] = explode( ':', $rule );
-                    $params = explode( ',', $params );
+                    $params            = explode( ',', $params );
                 }
 
                 $processor = $this->rules[ $name ];

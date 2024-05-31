@@ -22,11 +22,12 @@ namespace Omega\Validation;
  * @use
  */
 use Omega\Validation\Rule\RuleInterface;
-use Omega\Validation\Exceptions\ValidationException;
+use Omega\Validation\Exception\ValidationException;
+
 /**
- * Validation interface defines the contract for adding and validating rules.
+ * Abstract validation defines the contract for adding and validating rules.
  *
- * The `ValidationInterface` provides methods for adding validation rules and validating
+ * The `AbstractValidation` provides methods for adding validation rules and validating
  * data against those rules.
  *
  * @category    Omega
@@ -37,19 +38,26 @@ use Omega\Validation\Exceptions\ValidationException;
  * @license     https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
  * @version     1.0.0
  */
-interface ValidationInterface
+abstract class AbstractValidation implements ValidationInterface
 {
     /**
-     * Add a validation rule to the validator.
+     * Rule array.
+     *
+     * @var array $rules Holds an array of rules.
+     */
+    protected array $rules = [];
+
+    /**
+     * @inheritdoc
      *
      * @param  string        $alias Holds the alias for the rule.
      * @param  RuleInterface $rule  Holds an instance of RuleInterface representing the rule.
      * @return $this
      */
-    public function addRule( string $alias, RuleInterface $rule ) : static;
+    abstract public function addRule( string $alias, RuleInterface $rule ) : static;
 
     /**
-     * Validate data against a set of rules.
+     * @inheritdoc
      *
      * @param  array  $data        Holds an array of data to validate.
      * @param  array  $rules       Holds an array of validation rules.
@@ -57,5 +65,5 @@ interface ValidationInterface
      * @return array Return an array containing valid data.
      * @throws ValidationException if validation fails.
      */
-    public function validate( array $data, array $rules, string $sessionName = 'errors' ) : array;
+    abstract public function validate( array $data, array $rules, string $sessionName = 'errors' ) : array;
 }

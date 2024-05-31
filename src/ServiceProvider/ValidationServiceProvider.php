@@ -22,7 +22,7 @@ namespace Omega\Validation\ServiceProvider;
  * @use
  */
 use Omega\Application\Application;
-use Omega\Validation\ValidationManager;
+use Omega\Validation\Validation;
 use Omega\Validation\Rule\EmailRule;
 use Omega\Validation\Rule\IntegerRule;
 use Omega\Validation\Rule\MinRule;
@@ -55,11 +55,11 @@ class ValidationServiceProvider
     public function bind( Application $application ) : void
     {
         $application->alias( 'validator', function ( $application ) {
-            $validationManager = new ValidationManager();
+            $validation = new Validation();
 
-            $this->bindRules( $application, $validationManager );
+            $this->bindRules( $application, $validation );
 
-            return $validationManager;
+            return $validation;
         } );
     }
 
@@ -68,20 +68,20 @@ class ValidationServiceProvider
      *
      * Registers predefined validation rules in the ValidationManager.
      *
-     * @param  Application       $application       Holds an instance of Application.
-     * @param  ValidationManager $validationManager Holds an instance of ValidationManager.
+     * @param  Application $application Holds an instance of Application.
+     * @param  Validation  $validation  Holds an instance of ValidationManager.
      * @return void
      */
-    private function bindRules( Application $application, ValidationManager $validationManager ) : void
+    private function bindRules( Application $application, Validation $validation ) : void
     {
         $application->alias( 'validation.rule.required', fn() => new RequiredRule() );
         $application->alias( 'validation.rule.email', fn() => new EmailRule() );
         $application->alias( 'validation.rule.min', fn() => new MinRule() );
         $application->alias( 'validation.rule.integer', fn() => new IntegerRule() );
 
-        $validationManager->addRule( 'required', $application->resolve( 'validation.rule.required' ) );
-        $validationManager->addRule( 'email', $application->resolve( 'validation.rule.email' ) );
-        $validationManager->addRule( 'min', $application->resolve( 'validation.rule.min' ) );
-        $validationManager->addRule( 'integer', $application->resolve( 'validation.rule.integer' ) );
+        $validation->addRule( 'required', $application->resolve( 'validation.rule.required' ) );
+        $validation->addRule( 'email', $application->resolve( 'validation.rule.email' ) );
+        $validation->addRule( 'min', $application->resolve( 'validation.rule.min' ) );
+        $validation->addRule( 'integer', $application->resolve( 'validation.rule.integer' ) );
     }
 }
