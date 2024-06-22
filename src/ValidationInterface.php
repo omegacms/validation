@@ -22,7 +22,8 @@ namespace Omega\Validation;
  * @use
  */
 use Omega\Validation\Rule\RuleInterface;
-use Omega\Validation\Exceptions\ValidationException;
+use Omega\Validation\Exception\ValidationException;
+
 /**
  * Validation interface defines the contract for adding and validating rules.
  *

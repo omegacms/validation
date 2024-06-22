@@ -25,7 +25,7 @@ use function array_intersect_key;
 use function explode;
 use function str_contains;
 use Omega\Validation\Rule\RuleInterface;
-use Omega\Validation\Exceptions\ValidationException;
+use Omega\Validation\Exception\ValidationException;
 
 /**
  * Validation manager class.
@@ -44,13 +44,6 @@ use Omega\Validation\Exceptions\ValidationException;
  */
 class Validation extends AbstractValidation
 {
-    /**
-     * Rule array.
-     *
-     * @var array $rules Holds an array of rules.
-     */
-    protected array $rules = [];
-
     /**
      * @inheritdoc
      *
