@@ -16,7 +16,7 @@ declare( strict_types = 1 );
 /**
  * @namespace
  */
-namespace Omega\Validation\Exceptions;
+namespace Omega\Validation\Exception;
 
 /**
  * @use
