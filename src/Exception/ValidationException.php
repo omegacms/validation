@@ -45,14 +45,14 @@ class ValidationException extends InvalidArgumentException
      *
      * @var array $errors Holds an array of validation errors.
      */
-    protected array $errors = [];
+    public array $errors = [];
 
     /**
      * Session name.
      *
      * @var string $sessionName Holds the name of the session where validation errors should be stored.
      */
-    protected string $sessionName = 'errors';
+    public string $sessionName = 'errors';
 
     /**
      * Set the validation errors.

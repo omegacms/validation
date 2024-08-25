@@ -75,13 +75,13 @@ class ValidationServiceProvider
     private function bindRules( Application $application, Validation $validation ) : void
     {
         $application->alias( 'validation.rule.required', fn() => new RequiredRule() );
-        $application->alias( 'validation.rule.email', fn() => new EmailRule() );
-        $application->alias( 'validation.rule.min', fn() => new MinRule() );
-        $application->alias( 'validation.rule.integer', fn() => new IntegerRule() );
+        $application->alias( 'validation.rule.email',    fn() => new EmailRule()    );
+        $application->alias( 'validation.rule.min',      fn() => new MinRule()      );
+        $application->alias( 'validation.rule.integer',  fn() => new IntegerRule()  );
 
         $validation->addRule( 'required', $application->resolve( 'validation.rule.required' ) );
-        $validation->addRule( 'email', $application->resolve( 'validation.rule.email' ) );
-        $validation->addRule( 'min', $application->resolve( 'validation.rule.min' ) );
-        $validation->addRule( 'integer', $application->resolve( 'validation.rule.integer' ) );
+        $validation->addRule( 'email',    $application->resolve( 'validation.rule.email'    ) );
+        $validation->addRule( 'min',      $application->resolve( 'validation.rule.min'      ) );
+        $validation->addRule( 'integer',  $application->resolve( 'validation.rule.integer'  ) );
     }
 }

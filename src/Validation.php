@@ -11,7 +11,7 @@
 /**
  * @declare
  */
-declare( strict_types = 1 );
+//declare( strict_types = 1 );
 
 /**
  * @namespace
@@ -65,7 +65,7 @@ class Validation extends AbstractValidation
      * @param  array  $rules       Holds an array of rules.
      * @param  string $sessionName Holds the session name.
      * @return array Return an array of valid rule.
-     * @thrpws ValidationException if validation fails.
+     * @throws ValidationException if validation fails.
      */
     public function validate( array $data, array $rules, string $sessionName = 'errors' ) : array
     {
@@ -88,7 +88,7 @@ class Validation extends AbstractValidation
                         $errors[ $field ] = [];
                     }
 
-                    $errors[ $field ][] = $processor->getMessage( $data, $field, $params );
+                    array_push( $errors[ $field ], $processor->getMessage( $data, $field, $params ) );
                 }
             }
         }
@@ -100,7 +100,9 @@ class Validation extends AbstractValidation
             throw $exception;
         } else {
             // this is here until we have a better session system...
-            unset( $_SESSION[ $sessionName ] );
+            if ( $session = session() ) {
+                $session->forget( $sessionName );
+            }
         }
 
         return array_intersect_key( $data, $rules );
