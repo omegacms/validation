@@ -72,16 +72,18 @@ class ValidationServiceProvider
      * @param  Validation  $validation  Holds an instance of ValidationManager.
      * @return void
      */
-    private function bindRules( Application $application, Validation $validation ) : void
+    private function bindRules(Application $application, Validation $validation): void
     {
-        $application->alias( 'validation.rule.required', fn() => new RequiredRule() );
-        $application->alias( 'validation.rule.email',    fn() => new EmailRule()    );
-        $application->alias( 'validation.rule.min',      fn() => new MinRule()      );
-        $application->alias( 'validation.rule.integer',  fn() => new IntegerRule()  );
+        // Create rule instances directly
+        $requiredRule = new RequiredRule();
+        $emailRule = new EmailRule();
+        $minRule = new MinRule();
+        $integerRule = new IntegerRule();
 
-        $validation->addRule( 'required', $application->resolve( 'validation.rule.required' ) );
-        $validation->addRule( 'email',    $application->resolve( 'validation.rule.email'    ) );
-        $validation->addRule( 'min',      $application->resolve( 'validation.rule.min'      ) );
-        $validation->addRule( 'integer',  $application->resolve( 'validation.rule.integer'  ) );
+        // Add rules to the validation instance
+        $validation->addRule('required', $requiredRule);
+        $validation->addRule('email', $emailRule);
+        $validation->addRule('min', $minRule);
+        $validation->addRule('integer', $integerRule);
     }
 }

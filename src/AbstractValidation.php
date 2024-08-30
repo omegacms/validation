@@ -43,7 +43,7 @@ abstract class AbstractValidation implements ValidationInterface
     /**
      * Rule array.
      *
-     * @var array $rules Holds an array of rules.
+     * @var array<string, RuleInterface> $rules Holds an array of rules.
      */
     protected array $rules = [];
 
@@ -59,10 +59,10 @@ abstract class AbstractValidation implements ValidationInterface
     /**
      * @inheritdoc
      *
-     * @param  array  $data        Holds an array of data to validate.
-     * @param  array  $rules       Holds an array of validation rules.
-     * @param  string $sessionName Holds the session name for storing validation errors.
-     * @return array Return an array containing valid data.
+     * @param  array<string, mixed>               $data        Holds an array of data to validate.
+     * @param  array<string, array<int, string>>  $rules       Holds an array of validation rules.
+     * @param  string                             $sessionName Holds the session name for storing validation errors.
+     * @return array<string, mixed> Return an array containing valid data.
      * @throws ValidationException if validation fails.
      */
     abstract public function validate( array $data, array $rules, string $sessionName = 'errors' ) : array;

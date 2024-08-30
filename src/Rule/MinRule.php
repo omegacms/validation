@@ -21,7 +21,7 @@ namespace Omega\Validation\Rule;
 /**
  * @use
  */
-use function strlen;
+use Omega\Support\Str;
 use InvalidArgumentException;
 
 /**
@@ -46,36 +46,42 @@ class MinRule extends AbstractRule
     /**
      * @inheritdoc
      *
-     * @param  array  $data   Holds an array of data.
-     * @param  string $field  Holds the field name.
-     * @param  array  $params Holds an array of parameters.
-     * @return string|bool Return true if validation is correct, error message otherwise.
+     * @param  array<string,mixed>  $data   Holds array of data.
+     * @param  string               $field  Holds the name of the field being validated.
+     * @param  array<string>        $params Holds an array of parameters (not used for this rule).
+     * @return string|bool Returns `true` if validation is successful (valid integer format), or an error message if the validation fails.
      * @throws InvalidArgumentException If the minimum length parameter is not specified.
      */
-    public function validate( array $data, string $field, array $params ) : string|bool
+    public function validate(array $data, string $field, array $params): string|bool
     {
-        if ( empty( $data[ $field ] ) ) {
+        $value = $data[$field] ?? '';
+
+        if (empty($value)) {
             return true;
         }
 
-        if ( empty( $params[ 0 ] ) ) {
-            throw new InvalidArgumentException(
-                'Specify a min length.'
-            );
+        if (empty($params[0])) {
+            throw new InvalidArgumentException('Specify a min length.');
         }
 
-        $length = (int)$params[ 0 ];
+        if (!is_scalar($value)) {
+            $value = '';
+        } else {
+            $value = (string)$value;
+        }
 
-        return strlen( $data[ $field ] ) >= $length;
+        $length = (int)$params[0];
+
+        return Str::strlen($value) >= $length;
     }
 
     /**
      * @inheritdoc
      *
-     * @param  array  $data   Holds an array of data.
-     * @param  string $field  Holds the field name.
-     * @param  array  $params Holds an array of parameters.
-     * @return string Return the error message.
+     * @param  array<string, mixed> $data   Holds an array of data.
+     * @param  string               $field  Holds the name of the field that failed validation.
+     * @param  array<string>        $params Holds an array of parameters (not used for this rule).
+     * @return string Returns the error message indicating that the field should be in a valid integer format.
      */
     public function getMessage( array $data, string $field, array $params ) : string
     {

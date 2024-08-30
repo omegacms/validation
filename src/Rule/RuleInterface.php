@@ -38,9 +38,9 @@ interface RuleInterface
     /**
      * Validate the rule.
      *
-     * @param  array  $data   Holdsn array of data.
-     * @param  string $field  Holds the name of the field being validated.
-     * @param  array  $params Holds an array of parameters (not used for this rule).
+     * @param  array<string,mixed>  $data   Holdsn array of data.
+     * @param  string               $field  Holds the name of the field being validated.
+     * @param  array<string>        $params Holds an array of parameters (not used for this rule).
      * @return string|bool Returns `true` if validation is successful (valid integer format), or an error message if the validation fails.
      */
     public function validate( array $data, string $field, array $params ) : string|bool;
@@ -48,9 +48,9 @@ interface RuleInterface
     /**
      * Get the validation error message.
      *
-     * @param  array  $data   Holds an array of data.
-     * @param  string $field  Holds the name of the field that failed validation.
-     * @param  array  $params Holds an array of parameters (not used for this rule).
+     * @param  array<string, mixed> $data   Holds an array of data.
+     * @param  string               $field  Holds the name of the field that failed validation.
+     * @param  array<string>        $params Holds an array of parameters (not used for this rule).
      * @return string Returns the error message indicating that the field should be in a valid integer format.
      */
     public function getMessage( array $data, string $field, array $params ) : string;

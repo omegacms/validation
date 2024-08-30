@@ -52,10 +52,10 @@ interface ValidationInterface
     /**
      * Validate data against a set of rules.
      *
-     * @param  array  $data        Holds an array of data to validate.
-     * @param  array  $rules       Holds an array of validation rules.
-     * @param  string $sessionName Holds the session name for storing validation errors.
-     * @return array Return an array containing valid data.
+     * @param  array<string, mixed>               $data        Holds an array of data to validate.
+     * @param  array<string, array<int, string>>  $rules       Holds an array of validation rules.
+     * @param  string                             $sessionName Holds the session name for storing validation errors.
+     * @return array<string, mixed> Return an array containing valid data.
      * @throws ValidationException if validation fails.
      */
     public function validate( array $data, array $rules, string $sessionName = 'errors' ) : array;

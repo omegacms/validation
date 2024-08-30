@@ -21,7 +21,7 @@ namespace Omega\Validation\Rule;
 /**
  * @use
  */
-use function str_contains;
+use Omega\Support\Str;
 
 /**
  * Email rule class.
@@ -44,26 +44,34 @@ class EmailRule extends AbstractRule
     /**
      * @inheritdoc
      *
-     * @param  array  $data   Holdsn array of data.
-     * @param  string $field  Holds the name of the field being validated.
-     * @param  array  $params Holds an array of parameters (not used for this rule).
+     * @param  array<string,mixed>  $data   Holdsn array of data.
+     * @param  string               $field  Holds the name of the field being validated.
+     * @param  array<string>        $params Holds an array of parameters (not used for this rule).
      * @return string|bool Returns `true` if validation is successful (valid integer format), or an error message if the validation fails.
      */
     public function validate( array $data, string $field, array $params ) : string|bool
     {
-        if ( empty( $data[ $field ] ) ) {
+        $value = $data[$field] ?? '';
+
+        if (empty($value)) {
             return true;
         }
 
-        return str_contains( $data[ $field ], '@' );
+        if (!is_scalar($value)) {
+            $value = '';
+        } else {
+            $value = (string)$value;
+        }
+
+        return Str::strContains( $value, '@' );
     }
 
     /**
      * @inheritdoc
      *
-     * @param  array  $data   Holds an array of data.
-     * @param  string $field  Holds the name of the field that failed validation.
-     * @param  array  $params Holds an array of parameters (not used for this rule).
+     * @param  array<string, mixed> $data   Holds an array of data.
+     * @param  string               $field  Holds the name of the field that failed validation.
+     * @param  array<string>        $params Holds an array of parameters (not used for this rule).
      * @return string Returns the error message indicating that the field should be in a valid integer format.
      */
     public function getMessage( array $data, string $field, array $params ) : string

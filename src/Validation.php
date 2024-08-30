@@ -61,10 +61,10 @@ class Validation extends AbstractValidation
     /**
      * @inheritdoc
      *
-     * @param  array  $data        Holds an array of data.
-     * @param  array  $rules       Holds an array of rules.
-     * @param  string $sessionName Holds the session name.
-     * @return array Return an array of valid rule.
+     * @param  array<string, mixed>               $data        Holds an array of data to validate.
+     * @param  array<string, array<int, string>>  $rules       Holds an array of validation rules.
+     * @param  string                             $sessionName Holds the session name for storing validation errors.
+     * @return array<string, mixed> Return an array containing valid data.
      * @throws ValidationException if validation fails.
      */
     public function validate( array $data, array $rules, string $sessionName = 'errors' ) : array
@@ -72,39 +72,47 @@ class Validation extends AbstractValidation
         $errors = [];
 
         foreach ( $rules as $field => $rulesForField ) {
+            if (!is_array($rulesForField)) {
+                continue; // Skip if $rulesForField is not an array.
+            }
+
             foreach ( $rulesForField as $rule ) {
                 $name   = $rule;
                 $params = [];
 
-                if ( str_contains( $rule, ':' ) ) {
-                    [ $name, $params ] = explode( ':', $rule );
-                    $params            = explode( ',', $params );
+                if (is_string($rule) && str_contains($rule, ':')) {
+                    [ $name, $params ] = explode(':', $rule, 2);
+                    $params = explode(',', $params);
                 }
 
-                $processor = $this->rules[ $name ];
+                if (!isset($this->rules[$name])) {
+                    continue; // Skip if the rule processor is not found.
+                }
 
-                if ( ! $processor->validate( $data, $field, $params ) ) {
-                    if ( ! isset( $errors[ $field ] ) ) {
-                        $errors[ $field ] = [];
+                $processor = $this->rules[$name];
+
+                if (!$processor->validate($data, $field, $params)) {
+                    if (!isset($errors[$field])) {
+                        $errors[$field] = [];
                     }
 
-                    array_push( $errors[ $field ], $processor->getMessage( $data, $field, $params ) );
+                    $errors[$field][] = $processor->getMessage($data, $field, $params);
                 }
             }
         }
 
-        if ( count( $errors ) ) {
+        if (count($errors)) {
             $exception = new ValidationException();
-            $exception->setErrors( $errors );
-            $exception->setSessionName( $sessionName );
+            $exception->setErrors($errors);
+            $exception->setSessionName($sessionName);
             throw $exception;
         } else {
-            // this is here until we have a better session system...
-            if ( $session = session() ) {
-                $session->forget( $sessionName );
+            $session = session();
+            if ($session && is_object($session) && method_exists($session, 'forget')) {
+                $session->forget($sessionName);
             }
         }
 
-        return array_intersect_key( $data, $rules );
+        return array_intersect_key($data, $rules);
     }
 }

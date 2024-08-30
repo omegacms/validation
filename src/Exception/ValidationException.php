@@ -43,7 +43,7 @@ class ValidationException extends InvalidArgumentException
     /**
      * Errors array.
      *
-     * @var array $errors Holds an array of validation errors.
+     * @var array<string, array<string>> $errors Holds an array of validation errors.
      */
     public array $errors = [];
 
@@ -57,7 +57,7 @@ class ValidationException extends InvalidArgumentException
     /**
      * Set the validation errors.
      *
-     * @param  array $errors Holds an array containing validation errors.
+     * @param  array<string, array<string>> $errors Holds an array containing validation errors.
      * @return $this
      */
     public function setErrors( array $errors ) : static
@@ -70,7 +70,7 @@ class ValidationException extends InvalidArgumentException
     /**
      * Get the validation errors.
      *
-     * @return array An array of validation errors.
+     * @return array<string, array<string>> An array of validation errors.
      */
     public function getErrors() : array
     {
