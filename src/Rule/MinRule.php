@@ -22,7 +22,7 @@ namespace Omega\Validation\Rule;
  * @use
  */
 use Omega\Support\Str;
-use InvalidArgumentException;
+use Omega\Validation\Exception\ValidationException;
 
 /**
  * Min rule class.
@@ -50,7 +50,7 @@ class MinRule extends AbstractRule
      * @param  string               $field  Holds the name of the field being validated.
      * @param  array<string>        $params Holds an array of parameters (not used for this rule).
      * @return string|bool Returns `true` if validation is successful (valid integer format), or an error message if the validation fails.
-     * @throws InvalidArgumentException If the minimum length parameter is not specified.
+     * @throws ValidationException If the minimum length parameter is not specified.
      */
     public function validate(array $data, string $field, array $params): string|bool
     {
@@ -61,11 +61,11 @@ class MinRule extends AbstractRule
         }
 
         if (empty($params[0])) {
-            throw new InvalidArgumentException('Specify a min length.');
+            throw new ValidationException('Specify a min length.');
         }
 
         if (!is_scalar($value)) {
-            $value = '';
+            $value = "";
         } else {
             $value = (string)$value;
         }

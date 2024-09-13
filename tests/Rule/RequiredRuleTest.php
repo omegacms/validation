@@ -14,8 +14,9 @@ namespace Omega\Validation\Tests\Rule;
  * @use
  */
 use Omega\Validation\Exception\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
-class RequiredRuleTest extends AbstractRuleTest
+class RequiredRuleTest extends BaseRuleTest
 {
         /**
      * Test invalid required value fails.
@@ -26,7 +27,8 @@ class RequiredRuleTest extends AbstractRuleTest
      * 
      * @return void
      */
-    public function testInvalidRequiredValuesFails() : void
+    #[Test]
+    public function invalidValuesFails() : void
     {
         $expected = ['email' => ['email is required']];
 
@@ -51,7 +53,8 @@ class RequiredRuleTest extends AbstractRuleTest
      * 
      * @return void
      */
-    public function testValidRequiredValuesPasses() : void
+    #[Test]
+    public function validValuesPasses() : void
     {
         $data = $this->validation->validate( [
             'email' => 'foo@bar.com'

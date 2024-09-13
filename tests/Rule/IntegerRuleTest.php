@@ -14,8 +14,9 @@ namespace Omega\Validation\Tests\Rule;
  * @use
  */
 use Omega\Validation\Exception\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
-class IntegerRuleTest extends AbstractRuleTest
+class IntegerRuleTest extends BaseRuleTest
 {
      /**
      * Test invalid integer value fails.
@@ -24,7 +25,8 @@ class IntegerRuleTest extends AbstractRuleTest
      * `age` field. It asserts that a ValidationException is thrown with the 
      * expected error message (`age should be an integer.`).
      */
-    public function testInvalidIntegerValueFails() : void
+    #[Test]
+    public function invalidValuesFails() : void
     {
         $expected = [
             'age' => [
@@ -53,7 +55,8 @@ class IntegerRuleTest extends AbstractRuleTest
      * 
      * @return void
      */
-    public function testValidIntegerValuePasses() : void
+    #[Test]
+    public function validValuesPasses() : void
     {
         $data = $this->validation->validate( [ 
             'age' => 25
@@ -65,5 +68,17 @@ class IntegerRuleTest extends AbstractRuleTest
         ] );
 
         $this->assertEquals( $data[ 'age' ], 25 );
+    }
+
+    #[Test]
+    public function emptyValuePasses(): void
+    {
+        $data = $this->validation->validate([
+            'age' => ''  // Campo vuoto
+        ], [
+            'age' => ['integer']
+        ]);
+
+        $this->assertEquals($data['age'], '');  // Confronta il valore con il campo vuoto
     }
 }

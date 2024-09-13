@@ -14,10 +14,11 @@ namespace Omega\Validation\Tests\Rule;
  * @use
  */
 use Omega\Validation\Exception\ValidationException;
+use PHPUnit\Framework\Attributes\Test;
 
-class MinRuleTest extends AbstractRuleTest
+class MinRuleTest extends BaseRuleTest
 {
-        /**
+    /**
      * Test invalid min values fails.
      * 
      * This test simulates validating data with an email address that doesn't 
@@ -27,20 +28,20 @@ class MinRuleTest extends AbstractRuleTest
      * 
      * @return void
      */
-    public function testInvalidMinValuesFails() : void
+    #[Test]
+    public function invalidValuesFails(): void
     {
         $expected = ['email' => ['email should be at least 4 characters.']];
 
-        try {
+        [$exception, ] = $this->assertExceptionThrown(function() {
             $this->validation->validate([
                 'email' => 'foo'
             ], [
                 'email' => ['min:4']
             ]);
-            $this->fail('Expected ValidationException not thrown.');
-        } catch (ValidationException $exception) {
-            $this->assertEquals($expected, $exception->getErrors());
-        }
+        }, ValidationException::class);
+
+        $this->assertEquals($expected, $exception->getErrors());
     }
 
     /**
@@ -52,7 +53,8 @@ class MinRuleTest extends AbstractRuleTest
      * 
      * @return void
      */
-    public function testValidMinValuesPasses() : void
+    #[Test]
+    public function validValuesPasses() : void
     {
         $data = $this->validation->validate( [ 
             'email' => 'foo@bar.com'

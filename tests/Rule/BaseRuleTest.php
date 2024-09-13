@@ -31,6 +31,7 @@ use Omega\Validation\Rule\IntegerRule;
 use Omega\Validation\Rule\MinRule;
 use Omega\Validation\Rule\RequiredRule;
 use Omega\Testing\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Validation test class.
@@ -48,7 +49,7 @@ use Omega\Testing\TestCase;
  * @license     https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
  * @version     1.0.0
  */
-class AbstractRuleTest extends TestCase
+class BaseRuleTest extends TestCase
 {
     /**
      * Validation instance.
@@ -88,7 +89,8 @@ class AbstractRuleTest extends TestCase
      *
      * @return void
      */
-    public function testValidationObjectIsInitialized(): void
+    #[Test]
+    public function validationObjectIsInitialized(): void
     {
         $this->assertInstanceOf(Validation::class, $this->validation);
     }
