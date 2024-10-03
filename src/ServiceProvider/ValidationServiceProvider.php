@@ -22,6 +22,7 @@ namespace Omega\Validation\ServiceProvider;
  * @use
  */
 use Omega\Application\Application;
+use Omega\Container\ServiceProvider\ServiceProviderInterface;
 use Omega\Validation\Validation;
 use Omega\Validation\Rule\EmailRule;
 use Omega\Validation\Rule\IntegerRule;
@@ -44,7 +45,7 @@ use Omega\Validation\Rule\RequiredRule;
  * @license     https://www.gnu.org/licenses/gpl-3.0-standalone.html     GPL V3.0+
  * @version     1.0.0
  */
-class ValidationServiceProvider
+class ValidationServiceProvider implements ServiceProviderInterface
 {
     /**
      * Bind all method.
