@@ -33,8 +33,8 @@ use Omega\Validation\Exception\ValidationException;
  * considered valid.
  *
  * @category    Omega
- * @package     Omega\Validation
- * @subpackage  Omega\Validation\Rule
+ * @package     Validation
+ * @subpackage  Rule
  * @link        https://omegacms.github.io
  * @author      Adriano Giovannini <omegacms@outlook.com>
  * @copyright   Copyright (c) 2024 Adriano Giovannini. (https://omegacms.github.io)
